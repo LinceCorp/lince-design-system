@@ -116,3 +116,18 @@ describe("Tooltip", () => {
     expect(dica).toHaveTextContent("Fixar menu");
   });
 });
+
+describe("Dialogo, o conteúdo fechado", () => {
+  // Atenção: um <dialog> fechado continua com os filhos no DOM. Um formulário
+  // escondido ali duplica cada rótulo da página — e qualquer coisa que leia o
+  // DOM direto vê os dois.
+  it("fechado, não deixa os filhos no DOM", () => {
+    render(
+      <Dialogo aberto={false} aoFechar={vi.fn()} titulo="Editar">
+        <label htmlFor="x">Nome</label>
+      </Dialogo>,
+    );
+    expect(screen.queryByText("Nome")).not.toBeInTheDocument();
+    expect(screen.queryByText("Editar")).not.toBeInTheDocument();
+  });
+});

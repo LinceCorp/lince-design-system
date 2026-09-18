@@ -27,5 +27,14 @@ export interface DialogoProps {
  *
  * O clique no fundo também fecha: o alvo do clique é o próprio `<dialog>`
  * quando se acerta a área de fora, porque o conteúdo vive num filho.
+ *
+ * # O conteúdo só existe enquanto aberto
+ *
+ * O elemento fica montado — é dele que o efeito precisa para chamar
+ * `showModal` —, mas os filhos não. Um `<dialog>` fechado continua com os
+ * filhos no DOM, e um formulário escondido ali duplica cada rótulo da página. O
+ * navegador esconde isso da árvore de acessibilidade pelo `display: none` da
+ * folha do agente, mas qualquer coisa que leia o DOM direto — teste, extração,
+ * leitor de tela mal configurado — vê os dois.
  */
 export declare function Dialogo({ aberto, aoFechar, titulo, descricao, children, acoes, largura, className, }: DialogoProps): import("react").JSX.Element;

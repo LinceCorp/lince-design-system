@@ -616,7 +616,7 @@ function Q({ aberto: e, aoFechar: n, titulo: i, descricao: a, children: o, acoes
 	return t(() => {
 		let t = u.current;
 		t && (e && !t.open && t.showModal(), !e && t.open && t.close());
-	}, [e]), /* @__PURE__ */ S("dialog", {
+	}, [e]), /* @__PURE__ */ x("dialog", {
 		ref: u,
 		"aria-label": i,
 		onCancel: (e) => {
@@ -626,7 +626,7 @@ function Q({ aberto: e, aoFechar: n, titulo: i, descricao: a, children: o, acoes
 			e.target === u.current && n();
 		},
 		className: C("m-auto w-[calc(100vw-2rem)] rounded-dialog border border-line bg-elevated p-0", "text-fg shadow-dialog backdrop:bg-black/60", ae[c], l),
-		children: [
+		children: e && /* @__PURE__ */ S(b, { children: [
 			/* @__PURE__ */ S("div", {
 				className: "flex items-start justify-between gap-4 border-b border-line-subtle p-4",
 				children: [/* @__PURE__ */ S("div", {
@@ -657,7 +657,7 @@ function Q({ aberto: e, aoFechar: n, titulo: i, descricao: a, children: o, acoes
 				className: "flex justify-end gap-2 border-t border-line-subtle p-4",
 				children: s
 			})
-		]
+		] })
 	});
 }
 //#endregion

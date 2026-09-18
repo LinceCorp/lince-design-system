@@ -8,6 +8,16 @@ quem atualiza a dependência precisa saber o que vai parecer diferente.
 
 ## [Não publicado]
 
+## [0.2.2]
+
+### Alterado
+
+- **O conteúdo do `Dialogo` só existe enquanto ele está aberto.** Um `<dialog>`
+  fechado continua com os filhos no DOM, e um formulário escondido ali duplica
+  cada rótulo da página. O navegador esconde isso da árvore de acessibilidade,
+  mas qualquer coisa que leia o DOM direto — teste, extração, leitor de tela mal
+  configurado — via os dois.
+
 ## [0.2.1]
 
 ### Corrigido

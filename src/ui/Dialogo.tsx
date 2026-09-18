@@ -34,6 +34,15 @@ const LARGURAS = { sm: "max-w-sm", md: "max-w-lg", lg: "max-w-2xl" } as const;
  *
  * O clique no fundo também fecha: o alvo do clique é o próprio `<dialog>`
  * quando se acerta a área de fora, porque o conteúdo vive num filho.
+ *
+ * # O conteúdo só existe enquanto aberto
+ *
+ * O elemento fica montado — é dele que o efeito precisa para chamar
+ * `showModal` —, mas os filhos não. Um `<dialog>` fechado continua com os
+ * filhos no DOM, e um formulário escondido ali duplica cada rótulo da página. O
+ * navegador esconde isso da árvore de acessibilidade pelo `display: none` da
+ * folha do agente, mas qualquer coisa que leia o DOM direto — teste, extração,
+ * leitor de tela mal configurado — vê os dois.
  */
 export function Dialogo({
   aberto,
@@ -74,25 +83,29 @@ export function Dialogo({
         className,
       )}
     >
-      <div className="flex items-start justify-between gap-4 border-b border-line-subtle p-4">
-        <div className="min-w-0">
-          <h2 className="font-display text-title font-semibold">{titulo}</h2>
-          {descricao && <p className="mt-0.5 text-caption text-fg-muted">{descricao}</p>}
-        </div>
-        <button
-          type="button"
-          onClick={aoFechar}
-          aria-label="Fechar"
-          className="grid h-8 w-8 shrink-0 place-items-center rounded-control text-fg-muted transition hover:bg-input hover:text-fg"
-        >
-          <X size={18} aria-hidden="true" />
-        </button>
-      </div>
+      {aberto && (
+        <>
+          <div className="flex items-start justify-between gap-4 border-b border-line-subtle p-4">
+            <div className="min-w-0">
+              <h2 className="font-display text-title font-semibold">{titulo}</h2>
+              {descricao && <p className="mt-0.5 text-caption text-fg-muted">{descricao}</p>}
+            </div>
+            <button
+              type="button"
+              onClick={aoFechar}
+              aria-label="Fechar"
+              className="grid h-8 w-8 shrink-0 place-items-center rounded-control text-fg-muted transition hover:bg-input hover:text-fg"
+            >
+              <X size={18} aria-hidden="true" />
+            </button>
+          </div>
 
-      {children && <div className="p-4">{children}</div>}
+          {children && <div className="p-4">{children}</div>}
 
-      {acoes && (
-        <div className="flex justify-end gap-2 border-t border-line-subtle p-4">{acoes}</div>
+          {acoes && (
+            <div className="flex justify-end gap-2 border-t border-line-subtle p-4">{acoes}</div>
+          )}
+        </>
       )}
     </dialog>
   );
