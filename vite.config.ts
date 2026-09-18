@@ -5,7 +5,7 @@
  * bundle. Empacotá-los aqui colocaria uma SEGUNDA cópia do React dentro de cada
  * produto — e duas cópias do React no mesmo documento quebram todo hook.
  */
-import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
 import { resolve } from "node:path";
