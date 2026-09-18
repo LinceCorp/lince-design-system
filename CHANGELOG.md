@@ -8,6 +8,19 @@ quem atualiza a dependência precisa saber o que vai parecer diferente.
 
 ## [Não publicado]
 
+## [0.1.2]
+
+Nada muda de aparência.
+
+### Adicionado
+
+- `./package.json` nos `exports`, que várias ferramentas esperam poder ler.
+
+### Alterado
+
+- O repositório é público, e a instalação é por tag git — sem registro, sem
+  token, sem `.npmrc`.
+
 ## [0.1.1]
 
 Primeira versão **publicada**. Nada muda de aparência.
