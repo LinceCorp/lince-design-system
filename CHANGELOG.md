@@ -8,6 +8,17 @@ quem atualiza a dependência precisa saber o que vai parecer diferente.
 
 ## [Não publicado]
 
+## [0.2.1]
+
+### Corrigido
+
+- **As classes dos componentes não eram geradas no consumidor.** O Tailwind não
+  varre `node_modules` na detecção automática, então a casca chegava sem estilo
+  nenhum — sem largura de barra lateral, sem o `md:block` que a mostra no
+  desktop. Não havia erro: é o mesmo silêncio de um token que falta. O
+  `theme.css` passa a declarar `@source "./dist/index.js"`, que vale para todo
+  consumidor sem nenhuma configuração do lado dele.
+
 ## [0.2.0]
 
 O design system fica **completo**: os primitivos de interface entram, e o que

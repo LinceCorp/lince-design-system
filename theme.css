@@ -15,6 +15,20 @@
  */
 @import "tailwindcss";
 
+/*
+ * O Tailwind NÃO varre `node_modules` na detecção automática de classes.
+ *
+ * Sem esta linha, nenhuma classe usada dentro dos componentes deste pacote é
+ * gerada no CSS do consumidor: a casca renderiza sem estilo nenhum, a barra
+ * lateral perde a largura e o `md:block` que a mostra no desktop simplesmente
+ * não existe. E não há erro — é o mesmo silêncio de um token que falta.
+ *
+ * O caminho é relativo a ESTE arquivo, que mora dentro do pacote, então ele
+ * resolve igual em qualquer consumidor. `dist/index.js` é o fonte compilado:
+ * as classes chegam nele como texto.
+ */
+@source "./dist/index.js";
+
 @import "./tokens/marca.css";
 @import "./tokens/tipografia.css";
 @import "./tokens/raios.css";
