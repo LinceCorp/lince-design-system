@@ -1,7 +1,7 @@
 /**
  * O logotipo da Lince, em vetor.
  *
- * Este arquivo era idêntico, linha por linha, no CRM e no painel do cliente. É
+ * Este arquivo era idêntico, linha por linha, em mais de um produto. É
  * o caso mais puro do que este pacote existe para resolver: desenho de marca
  * copiado entre repositórios, que diverge na primeira vez que alguém ajusta um
  * traço num só lado.

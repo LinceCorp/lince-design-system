@@ -17,7 +17,7 @@ Primeira versão **publicada**. Nada muda de aparência.
 - O pacote não era consumível: o bun não autentica dependência git de
   repositório privado do GitHub — ele roteia toda dependência `github:` pela
   API de tarball e não envia credencial, em qualquer das cinco formas testadas.
-  A distribuição passa a ser o **GitHub Packages**, que o bun lê por `.npmrc`.
+  O repositório passou a ser público, e a instalação volta a ser por tag git.
 
 ## [0.1.0]
 
@@ -33,7 +33,7 @@ design system.
 - Portões de CI: contraste WCAG AA medido em todo par token × superfície, e
   verificação de token usado × token declarado.
 
-### Muda de aparência, para quem vinha do painel do gestor ou do cliente
+### Muda de aparência, para quem vinha das definições anteriores
 
 - **Fundo neutro.** Claro passa de `#f8f9fa` para `#ffffff`; escuro, de
   `#1e1e2e` para `#0b0b0d`. O roxo sai do fundo e continua inteiro no que é

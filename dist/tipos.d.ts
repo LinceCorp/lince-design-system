@@ -4,9 +4,9 @@ import { LucideIcon } from 'lucide-react';
  * Quem está usando, e como sair.
  *
  * A casca **não conhece autenticação**. Ela recebe o que mostrar e o que chamar
- * ao sair; quem sabe o que "sair" significa é o produto — no painel do cliente
- * é encerrar a sessão no servidor, no console de identidade é descartar o token
- * da memória, e a casca não tem por que saber a diferença.
+ * ao sair; quem sabe o que "sair" significa é o produto — num
+ * deles é encerrar a sessão no servidor, noutro é descartar o token da memória,
+ * e a casca não tem por que saber a diferença.
  */
 export interface PerfilDaCasca {
     nome: string;
@@ -20,9 +20,9 @@ export interface PerfilDaCasca {
 /**
  * O tema, **controlado pelo produto**.
  *
- * O pacote não persiste nada: o CRM guarda a escolha em `user_settings` (para
- * sincronizar entre aparelhos) e o painel do cliente guarda no aparelho, por
- * decisão registrada em ADR. Persistência é política, e política é do produto.
+ * O pacote não persiste nada: um produto guarda a escolha na conta, para
+ * sincronizar entre aparelhos; outro, no próprio aparelho, por decisão
+ * registrada em ADR. Persistência é política, e política é do produto.
  *
  * `resolvido` é o tema em vigor depois de resolvida a preferência do sistema —
  * nunca "auto". A casca precisa saber qual ícone desenhar, não qual regra levou
@@ -35,8 +35,7 @@ export interface TemaDaCasca {
 /**
  * Ação que cria alguma coisa sem trocar de página.
  *
- * Opcional: o CRM tem quatro ("novo negócio", "novo lead"…), o painel do
- * cliente não tem nenhuma. Ausente, a seção inteira não é renderizada — e não
+ * Opcional: um produto tem quatro, outro não tem nenhuma. Ausente, a seção inteira não é renderizada — e não
  * fica um título de seção vazio ocupando a barra.
  */
 export interface AcaoRapida {

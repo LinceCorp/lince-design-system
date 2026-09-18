@@ -26,8 +26,7 @@
    *
    * NÃO acompanha o canvas de cada produto, de propósito: a porta de entrada é
    * comum aos produtos da Lince, e era ela herdar o canvas de cada app que
-   * fazia as cinco abrirem com fundos diferentes — branco no CRM, violeta no
-   * identity, quase preto no gestor. Ver o ADR 0022 do lince-inspection-manager.
+   * fazia cada uma abrir com um fundo diferente. Ver o ADR que o registra.
    */
   --auth-canvas: light-dark(#f8f9fa, #1e1e2e);
 }

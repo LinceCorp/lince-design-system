@@ -8,11 +8,10 @@
  *
  * Não autentica, não persiste preferência, não conhece papel nem feature flag,
  * e não decide quais itens existem. Tudo isso entra por prop, e é o que permite
- * que a mesma casca sirva ao painel do cliente, ao CRM e ao painel do gestor —
- * três produtos com navegações completamente diferentes.
+ * que a mesma casca sirva a produtos com navegações completamente diferentes.
  *
- * O estado de fixação é **controlado**: o CRM o guarda em `user_settings` para
- * sincronizar entre aparelhos, o painel do cliente guarda no próprio aparelho.
+ * O estado de fixação é **controlado**: um produto o guarda na conta, para sincronizar entre
+ * aparelhos; outro, no próprio aparelho.
  * Persistência é política, e política é do produto.
  */
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
@@ -40,7 +39,7 @@ export interface AppShellProps {
   titulo?: string;
   /** Sino de notificações, busca — o que o produto pendurar à direita. */
   topbarExtra?: SlotDaCasca;
-  /** O conteúdo da rota. No CRM é `<Outlet/>`; no painel do cliente, a página. */
+  /** O conteúdo da rota. Um `<Outlet/>` de rota de layout, ou a própria página. */
   children?: ReactNode;
 }
 

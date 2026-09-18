@@ -18,7 +18,7 @@ export interface AppShellProps {
     titulo?: string;
     /** Sino de notificações, busca — o que o produto pendurar à direita. */
     topbarExtra?: SlotDaCasca;
-    /** O conteúdo da rota. No CRM é `<Outlet/>`; no painel do cliente, a página. */
+    /** O conteúdo da rota. Um `<Outlet/>` de rota de layout, ou a própria página. */
     children?: ReactNode;
 }
 /**

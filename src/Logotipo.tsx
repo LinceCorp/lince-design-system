@@ -1,7 +1,7 @@
 /**
  * O logotipo da Lince, em vetor.
  *
- * Este arquivo era idêntico, linha por linha, no CRM e no painel do cliente. É
+ * Este arquivo era idêntico, linha por linha, em mais de um produto. É
  * o caso mais puro do que este pacote existe para resolver: desenho de marca
  * copiado entre repositórios, que diverge na primeira vez que alguém ajusta um
  * traço num só lado.
@@ -12,8 +12,8 @@ interface LogotipoProps {
   decorativo?: boolean;
 }
 
-/* Os quatro traços da palavra "Lince", no mesmo desenho que o painel do gestor
-   publica em `public/logo.svg`. Ficam aqui, e não num arquivo servido, porque
+/* Os quatro traços da palavra "Lince", no mesmo desenho que os produtos
+   publicam. Ficam aqui, e não num arquivo servido, porque
    `<img>` não herda cor: este logotipo precisa ser branco sobre o roxo da marca
    e `text-fg` em qualquer outro lugar. */
 const TRACOS = [

@@ -1,56 +1,58 @@
-# Lince Design System
+<p align="center">
+  <img src="assets/capa.svg" alt="Lince Design System" width="100%">
+</p>
 
-Os tokens visuais e a casca de navegação da Lince, em um lugar só, consumidos
-pelos produtos web da organização:
+<p align="center">
+  Os tokens visuais e a casca de navegação da Lince, em um lugar só.
+</p>
 
-- `lince-inspections-client` — painel do cliente final
-- `lince-crm` — CRM
-- `lince-inspection-manager` — painel do gestor
+<p align="center">
+  <img alt="Tailwind 4" src="https://img.shields.io/badge/Tailwind-4-6F4B99?style=flat-square">
+  <img alt="React 19" src="https://img.shields.io/badge/React-19-6F4B99?style=flat-square">
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-6-6F4B99?style=flat-square">
+  <img alt="Contraste AA" src="https://img.shields.io/badge/contraste-WCAG%20AA-1BAF7A?style=flat-square">
+</p>
 
-## Por que este repositório existe
-
-Existiam **três definições do mesmo design system**, e elas divergiram sem que
-ninguém decidisse isso: raios, escala tipográfica, sombras, camadas e até a cor
-do fundo tinham valores diferentes em cada produto. A documentação canônica de
-então — 1240 linhas de Markdown no painel do gestor — chegou a descrever por
-meses um Tailwind v3 que já não existia.
-
-Prosa que descreve token diverge do token. A fonte da verdade passa a ser
-**código que os três importam**.
+---
 
 ## Instalação
 
-O pacote **não é publicado em registro**. A distribuição é por **tag git**:
-
 ```bash
-bun add github:LinceCorp/lince-design-system#v0.1.0
+bun add github:LinceCorp/lince-design-system#v0.1.1
 ```
 
-Não há passo de build no consumidor: o `dist/` é versionado neste repositório,
-justamente para que instalar por dependência git baste.
+## Os tokens
 
-`react`, `react-dom`, `react-router-dom` e `lucide-react` são **peer
-dependencies** — cada produto continua dono das versões, e o React não se
-duplica no bundle.
-
-## Uso
-
-### Os tokens
-
-No CSS de entrada do produto, uma linha:
+Uma linha no CSS de entrada:
 
 ```css
 @import "@lincecorp/design-system/theme.css";
 ```
 
-Ela traz o `@import "tailwindcss"`, o variant de tema escuro e os dez arquivos
-de token. Para mexer em um assunto isolado, importe só ele:
+Ela traz o Tailwind, o variant de tema escuro e os dez arquivos de token. Para
+mexer num assunto isolado, importe só ele:
 
 ```css
 @import "@lincecorp/design-system/tokens/raios.css";
 ```
 
-### A casca
+| Arquivo | O que guarda |
+|---|---|
+| `marca.css` | o roxo da marca e a lavagem da tela de entrada |
+| `tipografia.css` | as famílias e sete degraus nomeados por papel |
+| `raios.css` | a escala `xs`–`xl` e os apelidos por papel |
+| `sombras.css` | quatro níveis de elevação, um par por tema |
+| `movimento.css` | durações e curva, que zeram sozinhas em `prefers-reduced-motion` |
+| `camadas.css` | a escala de `z-index` e as larguras da casca |
+| `superficies.css` | fundo, superfície, texto, linha e acento |
+| `estado.css` | sucesso, aviso, erro e informação |
+| `dominio.css` | cor que significa um dado, não um estado de interface |
+| `base.css` | corpo, títulos, foco visível e o autofill do Chrome |
+
+Cada par claro/escuro é declarado **uma vez**, com `light-dark()`. Duas listas
+mantidas em paralelo divergem no primeiro token que alguém esquece.
+
+## A casca
 
 ```tsx
 import { AppShell, type NavModel } from "@lincecorp/design-system";
@@ -59,63 +61,58 @@ import { FileText, Wrench } from "lucide-react";
 const nav: NavModel = {
   groups: [{ id: "trabalho", label: "Trabalho" }],
   items: [
-    { group: "trabalho", to: "/inspecoes", label: "Inspeções", icon: FileText, bottom: true, end: true },
-    { group: "trabalho", to: "/ordens-de-servico", label: "Ordens de serviço", icon: Wrench, bottom: true },
+    { group: "trabalho", to: "/laudos", label: "Laudos", icon: FileText, bottom: true, end: true },
+    { group: "trabalho", to: "/ordens", label: "Ordens", icon: Wrench, bottom: true },
   ],
 };
 
 <AppShell
   nav={nav}
   logo={<Logotipo />}
-  marcaCompacta={<span>L</span>}
-  perfil={{ nome: usuario.nome, email: usuario.email, aoSair: sair }}
+  marcaCompacta="L"
+  perfil={{ nome, email, aoSair }}
   tema={{ resolvido, alternar }}
   fixada={fixada}
   aoAlternarFixada={alternarFixada}
-  topbarExtra={<SinoDeNotificacoes />}
 >
   <Outlet />
 </AppShell>
 ```
 
-A casca **não conhece contexto nenhum**. Autenticação, tema, papéis, feature
-flags e persistência entram por prop, e é o produto que decide cada um. A regra
-que separa os dois lados:
+Barra lateral colapsável com fixação e expansão no passar do mouse, gaveta no
+celular que é diálogo modal de verdade, barra superior, barra inferior, salto
+para o conteúdo e devolução de foco.
+
+A casca **não conhece contexto nenhum**. Autenticação, tema, papéis e
+persistência entram por prop:
 
 > O pacote é dono de **layout, comportamento e aparência**.
 > O produto é dono de **conteúdo e política**.
 
-`filtrarItem` é apresentação, nunca controle de acesso: esconder um item não
-protege a rota — isso é dos guards de cada produto.
+`filtrarItem` é apresentação, nunca controle de acesso — esconder um item não
+protege a rota.
 
 ## Desenvolvimento
 
 ```bash
 bun install
-bun run test              # Vitest + Testing Library, jsdom
+bun run test              # Vitest + Testing Library
 bun run tokens:contraste  # WCAG AA em todo par token × superfície
-bun run tokens:usados     # token usado existe; token órfão é acusado
-bun run typecheck
-bun run build             # ESM + .d.ts em dist/
-bun run ci                # tudo acima, na ordem
+bun run tokens:usados     # token referenciado que não existe
+bun run build             # ESM + .d.ts
+bun run ci                # tudo acima
 ```
 
-### Versionamento
+O `dist/` é **versionado**: instalar por tag não roda passo de build, e o portão
+falha se ele divergir do fonte.
 
-Tag semver, aplicada depois de `bun run ci` passar:
+O contraste não é conferido a olho. `tokens:contraste` mede cada cor de texto
+contra cada superfície, nos dois temas, compondo o alfa antes de medir, e
+reprova abaixo de 4,5:1.
 
-- **minor** — token novo, ou mudança de valor de token
-- **major** — remoção ou renomeação de token, mudança de assinatura de componente
+## Versionamento
 
-O `CHANGELOG.md` nomeia o que mudou de **aparência**, não só o que mudou de
-código: quem atualiza a dependência precisa saber o que vai parecer diferente.
-
-### Como um produto sobe de versão
-
-```bash
-bun add github:LinceCorp/lince-design-system#v0.2.0
-bun run ci   # no produto
-```
-
-A trava contra deriva é o `bun.lock`: um produto não fica com tokens diferentes
-dos outros sem que isso apareça como diff.
+Tag semver, aplicada depois de `bun run ci` passar. **Minor** para token novo ou
+valor alterado; **major** para token removido ou assinatura de componente
+mudada. O `CHANGELOG.md` diz o que muda de **aparência**, não só o que muda de
+código.

@@ -33,8 +33,8 @@
  * para o RESTO: utilitário `dark:` solto no JSX, que precisa enxergar tanto a
  * preferência do sistema quanto a trava manual do atributo.
  *
- * Cobre os dois de propósito. O painel do gestor usava `.dark` por classe e o
- * CRM, `[data-theme]` — e nenhum dos dois respeitava a preferência do sistema
+ * Cobre os dois de propósito. Um produto usava `.dark` por classe e outro,
+ * `[data-theme]` — e nenhum dos dois respeitava a preferência do sistema
  * sozinha, que é o estado em que a pessoa chega na primeira visita.
  */
 @custom-variant dark {

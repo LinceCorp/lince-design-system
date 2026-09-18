@@ -2,7 +2,7 @@
  * Tokens de DOMÍNIO — cor que significa um dado, não um estado de interface.
  *
  * Moram aqui porque atravessam produtos: a severidade de uma não conformidade é
- * a mesma no painel do gestor, no do cliente e em qualquer relatório. Ficar em
+ * a mesma em qualquer produto e em qualquer relatório. Ficar em
  * cada repositório foi o que permitiu que o mesmo "alta" tivesse dois vermelhos
  * diferentes dependendo da tela em que a pessoa estava.
  */
@@ -27,7 +27,7 @@
   --serie-2: light-dark(#1baf7a, #199e70);
   --serie-3: light-dark(#eb6834, #d95926);
 
-  /* As duas pontas da rampa de estágio do funil (CRM).
+  /* As duas pontas da rampa de estágio de funil.
    *
    * A rampa termina onde o verde de ganho começa: avançar no funil é convergir
    * visualmente para o ganho. Por isso ela não vai para o quente — âmbar já
