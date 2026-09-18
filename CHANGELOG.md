@@ -8,6 +8,23 @@ quem atualiza a dependência precisa saber o que vai parecer diferente.
 
 ## [Não publicado]
 
+## [0.3.1]
+
+### Adicionado
+
+- `.lince-pressiona-bloco`, para bloco clicável grande. A escala é menor que a
+  do botão: 0,97 num card de 300 px é tranco; num botão de 90 px é resposta.
+- `* { border-color: var(--border) }` e `html, body, #root { height: 100% }` na
+  camada base.
+
+### Corrigido
+
+- `.lince-pressiona` afundava também quando desabilitado. Agora tem a guarda
+  `:not(:disabled)`.
+- O foco visível passa a valer para `a`, `button`, `[role="button"]` e
+  `[tabindex]`, e não para tudo: controle de formulário mantém o próprio
+  realce, e um seletor universal dobrava o anel nos dois.
+
 ## [0.3.0]
 
 ### Adicionado

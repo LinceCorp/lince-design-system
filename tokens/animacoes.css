@@ -148,8 +148,27 @@
     color var(--dur-fast) var(--ease-out);
 }
 
-.lince-pressiona:active {
-  transform: scale(0.98);
+.lince-pressiona:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/*
+ * Bloco clicável grande — card, linha de lista.
+ *
+ * A escala é MENOR que a do botão: 0,97 num card de 300 px é tranco; num botão
+ * de 90 px é resposta. O mesmo número em tamanhos diferentes não produz a mesma
+ * sensação.
+ */
+.lince-pressiona-bloco {
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.lince-pressiona-bloco:active {
+  transform: scale(0.995);
 }
 
 /* Esqueleto com brilho que atravessa. */
