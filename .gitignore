@@ -1,0 +1,10 @@
+node_modules/
+*.log
+.DS_Store
+coverage/
+
+# `dist/` NÃO entra aqui, de propósito.
+#
+# O pacote é instalado por dependência git (`github:LinceCorp/…#vX.Y.Z`), e
+# dependência git não roda passo de build no consumidor. O artefato precisa
+# estar versionado, ou os três produtos instalariam um pacote sem código.
