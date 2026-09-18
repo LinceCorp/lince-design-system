@@ -8,6 +8,19 @@ quem atualiza a dependência precisa saber o que vai parecer diferente.
 
 ## [Não publicado]
 
+## [0.3.0]
+
+### Adicionado
+
+- **As animações da marca**, em `tokens/animacoes.css`: `lince-pulse`,
+  `lince-entrada`, `lince-entrada-lista`, `lince-camada` (com origem por lado),
+  `lince-veu`, `lince-pressiona` e `lince-esqueleto`. Todas usam `--dur*` e
+  `--ease-out`, então todas param sozinhas quando o sistema pede menos
+  movimento.
+- `--stage-tint`, quanto da cor do estágio tinge o fundo da coluna — mais no
+  escuro que no claro, porque sobre fundo quase preto a mesma porcentagem quase
+  não aparece.
+
 ## [0.2.2]
 
 ### Alterado

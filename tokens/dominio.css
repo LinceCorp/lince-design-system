@@ -27,6 +27,14 @@
   --serie-2: light-dark(#1baf7a, #199e70);
   --serie-3: light-dark(#eb6834, #d95926);
 
+  /* Quanto da cor do estágio tinge o fundo da coluna.
+   *
+   * O escuro aceita mais tinta que o claro: sobre fundo quase preto a mesma
+   * porcentagem quase não aparece, e sobre branco ela come o contraste do texto
+   * que fica por cima. Estes dois valores são o máximo que passa em AA com os
+   * tokens de texto atuais. */
+  --stage-tint: light-dark(10%, 18%);
+
   /* As duas pontas da rampa de estágio de funil.
    *
    * A rampa termina onde o verde de ganho começa: avançar no funil é convergir

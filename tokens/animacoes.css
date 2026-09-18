@@ -1,0 +1,174 @@
+/*
+ * As animações da marca.
+ *
+ * Todas curtas e pequenas, pelo mesmo motivo: o objetivo é dizer "isto mudou",
+ * não encenar a mudança. Deslocamento de 4 px, escala de 0,96 — o suficiente
+ * para o olho registrar, pouco o bastante para não custar espera.
+ *
+ * Todas usam `--dur*` e `--ease-out`, então todas param sozinhas quando o
+ * sistema pede menos movimento: as durações zeram no token, em `movimento.css`.
+ */
+
+/* Ponto de estado que muda sozinho — sincronizando, em execução. */
+@keyframes lince-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.82);
+  }
+}
+
+.lince-pulse {
+  animation: lince-pulse 1.6s ease-in-out infinite;
+}
+
+/* Entrada de bloco: sobe 4 px e aparece. */
+@keyframes lince-entrada {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.lince-entrada {
+  animation: lince-entrada var(--dur-slow) var(--ease-out) both;
+}
+
+/* Entrada de lista: os seis primeiros filhos entram em cascata de 30 ms.
+ * SÓ os seis — numa lista de duzentas linhas, a cascata inteira vira espera. */
+.lince-entrada-lista > * {
+  animation: lince-entrada var(--dur) var(--ease-out) both;
+}
+.lince-entrada-lista > *:nth-child(1) {
+  animation-delay: 0ms;
+}
+.lince-entrada-lista > *:nth-child(2) {
+  animation-delay: 30ms;
+}
+.lince-entrada-lista > *:nth-child(3) {
+  animation-delay: 60ms;
+}
+.lince-entrada-lista > *:nth-child(4) {
+  animation-delay: 90ms;
+}
+.lince-entrada-lista > *:nth-child(5) {
+  animation-delay: 120ms;
+}
+.lince-entrada-lista > *:nth-child(n + 6) {
+  animation-delay: 150ms;
+}
+
+/* Camada que abre a partir do gatilho — menu, dica, popover, modal.
+ *
+ * `data-state` e `data-side` são a convenção do Radix. Onde não houver Radix,
+ * o seletor simplesmente não casa: é CSS inerte, e vale a pena mantê-lo aqui
+ * para que a camada tenha o MESMO movimento em todo produto que usar a
+ * convenção.
+ *
+ * A origem segue o lado em que a camada foi posicionada — sem isso ela cresce
+ * do canto errado, e o olho vê a camada "vindo" de um lugar onde nada está. */
+@keyframes lince-surge {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes lince-some {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+.lince-camada[data-state="open"] {
+  animation: lince-surge var(--dur-fast) var(--ease-out);
+}
+.lince-camada[data-state="closed"] {
+  animation: lince-some var(--dur-fast) var(--ease-out);
+}
+.lince-camada[data-side="top"] {
+  transform-origin: bottom center;
+}
+.lince-camada[data-side="bottom"] {
+  transform-origin: top center;
+}
+.lince-camada[data-side="left"] {
+  transform-origin: center right;
+}
+.lince-camada[data-side="right"] {
+  transform-origin: center left;
+}
+
+/* Véu do modal e da gaveta. */
+@keyframes lince-veu {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.lince-veu[data-state="open"] {
+  animation: lince-veu var(--dur) var(--ease-out);
+}
+.lince-veu[data-state="closed"] {
+  animation: lince-veu var(--dur-fast) var(--ease-out) reverse;
+}
+
+/*
+ * Resposta ao toque.
+ *
+ * `active:` sozinho não basta em CSS utilitário: em ponteiro fino o estado dura
+ * menos que um quadro, e nada é visto. É a TRANSIÇÃO que dá o afundar e o
+ * voltar. Vale para botão, link de card e linha clicável.
+ */
+.lince-pressiona {
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+
+.lince-pressiona:active {
+  transform: scale(0.98);
+}
+
+/* Esqueleto com brilho que atravessa. */
+@keyframes lince-brilho {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.lince-esqueleto {
+  background-image: linear-gradient(
+    90deg,
+    var(--bg-input) 0%,
+    var(--border-subtle) 50%,
+    var(--bg-input) 100%
+  );
+  background-size: 200% 100%;
+  animation: lince-brilho 1.4s linear infinite;
+}
