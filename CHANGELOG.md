@@ -8,6 +8,17 @@ quem atualiza a dependência precisa saber o que vai parecer diferente.
 
 ## [Não publicado]
 
+## [0.1.1]
+
+Primeira versão **publicada**. Nada muda de aparência.
+
+### Corrigido
+
+- O pacote não era consumível: o bun não autentica dependência git de
+  repositório privado do GitHub — ele roteia toda dependência `github:` pela
+  API de tarball e não envia credencial, em qualquer das cinco formas testadas.
+  A distribuição passa a ser o **GitHub Packages**, que o bun lê por `.npmrc`.
+
 ## [0.1.0]
 
 Primeira versão. Nasce da convergência de três definições divergentes do mesmo

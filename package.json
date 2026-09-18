@@ -1,6 +1,6 @@
 {
   "name": "@lincecorp/design-system",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Design system da Lince: tokens e casca de navegação, compartilhados pelos produtos web.",
   "type": "module",
   "license": "UNLICENSED",
