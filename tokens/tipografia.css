@@ -1,0 +1,30 @@
+/*
+ * Tipografia.
+ *
+ * Sete degraus nomeados pelo PAPEL, não pelo tamanho: trocar o valor de
+ * `caption` muda todo metadado de uma vez. Os tamanhos viviam crus no JSX —
+ * `text-[10px]`, `text-[11px]`, `text-[13px]` espalhados, sem ninguém saber
+ * qual era o degrau seguinte.
+ *
+ * A escala é apertada de propósito. Estes são produtos de trabalho, e alguém
+ * passa o dia lendo tabela: salto grande desperdiça altura de tela.
+ */
+@theme {
+  --font-sans: "Inter Variable", "Inter", system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque Variable", "Bricolage Grotesque", system-ui, sans-serif;
+
+  --text-micro: 0.6875rem;      /* 11px — contadores, selos */
+  --text-micro--line-height: 1.3;
+  --text-caption: 0.75rem;      /* 12px — metadado sob o título */
+  --text-caption--line-height: 1.4;
+  --text-label: 0.8125rem;      /* 13px — rótulo de campo */
+  --text-label--line-height: 1.45;
+  --text-body: 0.875rem;        /* 14px — corpo padrão */
+  --text-body--line-height: 1.55;
+  --text-title: 1.125rem;       /* 18px — título de card */
+  --text-title--line-height: 1.3;
+  --text-display: 1.5rem;       /* 24px — título de página */
+  --text-display--line-height: 1.2;
+  --text-hero: 2.125rem;        /* 34px — número grande */
+  --text-hero--line-height: 1.05;
+}

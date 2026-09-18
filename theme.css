@@ -1,0 +1,49 @@
+/*
+ * O barril do design system da Lince.
+ *
+ * Uma linha no CSS de entrada de cada produto:
+ *
+ *     @import "@lincecorp/design-system/theme.css";
+ *
+ * Este arquivo SÓ importa. Um arquivo por assunto é o que torna editar um token
+ * uma mudança localizada, em vez de uma caçada dentro de trezentas linhas — e
+ * era a falta disso que fazia três produtos divergirem sem ninguém notar.
+ *
+ * Os `@import` vêm todos antes de qualquer outra regra porque o CSS exige isso:
+ * `@import` só pode ser precedido de `@charset` e `@layer`. Por isso o
+ * `@custom-variant` fica no fim, e não no meio da lista.
+ */
+@import "tailwindcss";
+
+@import "./tokens/marca.css";
+@import "./tokens/tipografia.css";
+@import "./tokens/raios.css";
+@import "./tokens/sombras.css";
+@import "./tokens/movimento.css";
+@import "./tokens/camadas.css";
+@import "./tokens/superficies.css";
+@import "./tokens/estado.css";
+@import "./tokens/dominio.css";
+@import "./tokens/base.css";
+
+/*
+ * O variant de tema escuro.
+ *
+ * Os tokens acima já respondem sozinhos por `light-dark()`. Este variant existe
+ * para o RESTO: utilitário `dark:` solto no JSX, que precisa enxergar tanto a
+ * preferência do sistema quanto a trava manual do atributo.
+ *
+ * Cobre os dois de propósito. O painel do gestor usava `.dark` por classe e o
+ * CRM, `[data-theme]` — e nenhum dos dois respeitava a preferência do sistema
+ * sozinha, que é o estado em que a pessoa chega na primeira visita.
+ */
+@custom-variant dark {
+  &:where([data-theme="dark"], [data-theme="dark"] *) {
+    @slot;
+  }
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme="light"]), :root:not([data-theme="light"]) *) {
+      @slot;
+    }
+  }
+}

@@ -1,0 +1,40 @@
+/*
+ * Elevação.
+ *
+ * Sombra significa UMA coisa: isto flutua sobre o resto e vai embora. O que
+ * está no fluxo da página — card, cabeçalho, coluna — é separado por LINHA, não
+ * por sombra. Antes todo card tinha sombra, e com dezenas deles numa tela o
+ * efeito era sujeira cinza em volta de tudo, não hierarquia.
+ *
+ * Sombra preta sobre fundo quase preto não existe: no escuro a separação vem da
+ * superfície mais clara, e a sombra fica mais densa só para dar a borda escura
+ * que destaca o plano de cima.
+ */
+:root {
+  --elev-1: light-dark(
+    0 1px 2px rgba(9, 9, 11, 0.05),
+    0 1px 2px rgba(0, 0, 0, 0.5)
+  );
+  --elev-2: light-dark(
+    0 2px 6px rgba(9, 9, 11, 0.07),
+    0 2px 8px rgba(0, 0, 0, 0.6)
+  );
+  --elev-3: light-dark(
+    0 8px 20px rgba(9, 9, 11, 0.12),
+    0 10px 24px rgba(0, 0, 0, 0.7)
+  );
+  --elev-4: light-dark(
+    0 16px 48px rgba(9, 9, 11, 0.16),
+    0 20px 56px rgba(0, 0, 0, 0.75)
+  );
+}
+
+/* O par mora em `--elev-*` e o utilitário em `--shadow-*`, com nomes
+ * DIFERENTES de propósito: `--shadow-1: var(--shadow-1)` é referência circular,
+ * e o Tailwind a resolve para vazio — sombra nenhuma, sem erro nenhum. */
+@theme inline {
+  --shadow-1: var(--elev-1);
+  --shadow-2: var(--elev-2);
+  --shadow-3: var(--elev-3);
+  --shadow-4: var(--elev-4);
+}

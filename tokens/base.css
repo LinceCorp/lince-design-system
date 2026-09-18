@@ -1,0 +1,51 @@
+/*
+ * A camada base: o que vale para o documento inteiro, em todo produto.
+ */
+@layer base {
+  body {
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+
+  /* Foco visível é requisito de acessibilidade, não enfeite: metade das pessoas
+     abre estes produtos no celular, e a outra metade navega por teclado. */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* O autofill do Chrome pinta o campo de amarelo e o texto de preto, por cima
+     de qualquer `background-color`. No tema escuro isso some com o texto. Só o
+     `box-shadow` interno vence o estilo do agente de usuário; a transição
+     absurda é o truque consagrado para adiar a repintura indefinidamente. */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    box-shadow: inset 0 0 0 1000px var(--bg-surface);
+    -webkit-text-fill-color: var(--text-primary);
+    caret-color: var(--text-primary);
+    transition: background-color 9999s ease-in-out 0s;
+  }
+
+  /* Quem pede menos movimento recebe menos movimento. As durações já zeram em
+     `movimento.css`; este bloco alcança o que não passa por elas — animação de
+     biblioteca de terceiro, sobretudo. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

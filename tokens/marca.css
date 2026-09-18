@@ -1,0 +1,54 @@
+/*
+ * A marca.
+ *
+ * Os nove degraus do roxo Lince, ancorados em #6F4B99 (degrau 500), e as três
+ * paradas da lavagem que pinta a tela de autenticação.
+ */
+@theme {
+  --color-brand-50: #f1ecf8;
+  --color-brand-100: #ddd0ee;
+  --color-brand-200: #bca2dc;
+  --color-brand-300: #a989c9;
+  --color-brand-400: #8c68b5;
+  --color-brand-500: #6f4b99;
+  --color-brand-600: #5a3d7e;
+  --color-brand-700: #473163;
+  --color-brand-800: #342348;
+}
+
+:root {
+  /* No claro a lavagem começa no roxo da marca; no escuro, um degrau abaixo. */
+  --marca-1: light-dark(var(--color-brand-500), var(--color-brand-600));
+  --marca-2: light-dark(var(--color-brand-600), var(--color-brand-700));
+  --marca-3: light-dark(var(--color-brand-800), var(--color-brand-800));
+
+  /* O fundo da coluna do formulário na tela de entrada.
+   *
+   * NÃO acompanha o canvas de cada produto, de propósito: a porta de entrada é
+   * comum aos produtos da Lince, e era ela herdar o canvas de cada app que
+   * fazia as cinco abrirem com fundos diferentes — branco no CRM, violeta no
+   * identity, quase preto no gestor. Ver o ADR 0022 do lince-inspection-manager.
+   */
+  --auth-canvas: light-dark(#f8f9fa, #1e1e2e);
+}
+
+/* O fundo da metade colorida da tela de entrada.
+ *
+ * É utilitário, e não quatro classes soltas no JSX (`bg-linear-145 from-… via-…
+ * to-…`), porque o ângulo e as paradas SÃO a decisão — e decisão mora no design
+ * system, não na tela. */
+@utility fundo-marca {
+  background-image: linear-gradient(
+    145deg,
+    var(--marca-1) 0%,
+    var(--marca-2) 48%,
+    var(--marca-3) 100%
+  );
+}
+
+/* O fundo da outra metade da mesma tela. Utilitário pelo mesmo motivo: é
+ * acordo entre repositórios, e acordo que mora numa classe do JSX some na
+ * primeira refatoração. */
+@utility fundo-auth {
+  background-color: var(--auth-canvas);
+}

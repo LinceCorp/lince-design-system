@@ -1,0 +1,32 @@
+/*
+ * Raios.
+ *
+ * A escala anterior (6/10/14/20/28) arredondava tudo o tempo todo: campo,
+ * botão, card, coluna e modal saíam todos macios, e num produto com tabela
+ * densa isso vira ruído — o olho perde a linha reta que separa uma célula da
+ * outra. Esta é metade: presente o suficiente para não parecer caixa de diálogo
+ * do sistema, discreta o suficiente para sumir.
+ *
+ * `rounded-full` continua existindo e fica reservado ao que é de fato redondo:
+ * avatar e ponto de status.
+ */
+@theme {
+  --radius-xs: 3px;
+  --radius-sm: 5px;
+  --radius-md: 7px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+
+  /* Aliases por PAPEL.
+   *
+   * Existem para que o JSX continue lendo `rounded-card` em vez de
+   * `rounded-xl`: o papel é estável, o valor é que se ajusta. Trocar a escala
+   * acima muda todo card de uma vez, nos três produtos, sem tocar em JSX
+   * nenhum. */
+  --radius-card: var(--radius-xl);      /* 14px */
+  --radius-button: var(--radius-lg);    /* 10px */
+  --radius-control: var(--radius-md);   /*  7px — campo, botão de ícone */
+  --radius-chip: var(--radius-xl);      /* 14px — era 20px */
+  --radius-badge: var(--radius-sm);     /*  5px — era  8px */
+  --radius-dialog: var(--radius-xl);    /* 14px — era 20px */
+}

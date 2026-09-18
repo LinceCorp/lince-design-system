@@ -1,0 +1,28 @@
+/*
+ * Camadas, e as larguras da casca.
+ *
+ * Os valores de z eram literais e conflitantes: `z-30` servia ao mesmo tempo
+ * para menu suspenso e para o scrim da gaveta, então o empilhamento dependia da
+ * ordem no DOM. Uma escala só, em ordem de precedência real.
+ */
+:root {
+  /* Abaixo de tudo que é global: o card arrastado só precisa flutuar sobre os
+     irmãos da mesma coluna, nunca sobre a interface. */
+  --z-drag: 10;
+  --z-sticky: 20;
+  --z-dropdown: 30;
+  --z-sidebar: 40;
+  --z-drawer: 50;
+  --z-assistant: 60;
+  --z-modal: 70;
+  --z-palette: 80;
+  /* O salto para o conteúdo fica acima de quase tudo: ele aparece ao receber
+     foco, e aparecer atrás de um cabeçalho fixo é não aparecer. */
+  --z-skip: 90;
+  --z-toast: 100;
+
+  /* A casca. Token, e não número no componente, porque o conteúdo precisa do
+     mesmo valor para se deslocar junto. */
+  --sidebar-w: 229px;
+  --sidebar-w-collapsed: 64px;
+}

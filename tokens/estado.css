@@ -1,0 +1,35 @@
+/*
+ * Estado: sucesso, aviso, erro, informação.
+ *
+ * Os quatro tinham o MESMO valor nos dois temas, e esse era o defeito: os tons
+ * do escuro reprovavam em AA sobre branco (sucesso 2,5:1, aviso 2,1:1), e os do
+ * claro somem sobre preto. Cada tema recebe valor medido — por
+ * `scripts/verificar-contraste.mjs`, não a olho.
+ */
+:root {
+  --status-success: light-dark(#046b4e, #10b981);
+  --status-warning: light-dark(#a2490a, #f59e0b);
+  --status-danger: light-dark(#b91c1c, #f87171);
+  --status-info: light-dark(#1d4ed8, #60a5fa);
+
+  /* A superfície do aviso de erro.
+   *
+   * Existe como token próprio em vez de sair de um `bg-danger/10`: uma
+   * porcentagem cega da cor de texto dá tom lavado no claro e sujo no escuro. */
+  --status-danger-surface: light-dark(#fef2f2, rgba(248, 113, 113, 0.12));
+  --status-danger-line: light-dark(#fecaca, rgba(248, 113, 113, 0.32));
+  /* O texto DENTRO do aviso não pode ser `--status-danger`: aquele tom foi
+     medido contra a tela, e sobre a superfície tingida ele cai para 3,9:1 no
+     escuro. Este é medido contra a superfície tingida. */
+  --status-danger-strong: light-dark(#991b1b, #fca5a5);
+}
+
+@theme inline {
+  --color-success: var(--status-success);
+  --color-warning: var(--status-warning);
+  --color-danger: var(--status-danger);
+  --color-info: var(--status-info);
+  --color-danger-surface: var(--status-danger-surface);
+  --color-danger-line: var(--status-danger-line);
+  --color-danger-strong: var(--status-danger-strong);
+}

@@ -1,0 +1,22 @@
+/*
+ * Movimento.
+ *
+ * `duration-200` aparecia cru no JSX, e nada respeitava a preferência por menos
+ * animação. As durações zeram lá embaixo quando o sistema pede menos movimento
+ * — zerar no TOKEN é o que faz a preferência valer para tudo, inclusive para a
+ * transição que alguém escrever amanhã.
+ */
+@theme {
+  --dur-fast: 120ms;
+  --dur: 180ms;
+  --dur-slow: 280ms;
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur: 0ms;
+    --dur-slow: 0ms;
+  }
+}

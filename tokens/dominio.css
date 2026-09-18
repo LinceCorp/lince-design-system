@@ -1,0 +1,48 @@
+/*
+ * Tokens de DOMÍNIO — cor que significa um dado, não um estado de interface.
+ *
+ * Moram aqui porque atravessam produtos: a severidade de uma não conformidade é
+ * a mesma no painel do gestor, no do cliente e em qualquer relatório. Ficar em
+ * cada repositório foi o que permitiu que o mesmo "alta" tivesse dois vermelhos
+ * diferentes dependendo da tela em que a pessoa estava.
+ */
+:root {
+  /* Severidade de não conformidade — os quatro níveis do domínio, na grafia em
+     que o backend os grava: baixa, média, alta, crítica.
+     Cada tema recebe valor próprio pelo motivo de sempre: o verde escuro que
+     passa sobre branco some sobre preto. */
+  --sev-baixa: light-dark(#2e7d32, #4ade80);
+  --sev-media: light-dark(#a2490a, #fbbf24);
+  --sev-alta: light-dark(#b91c1c, #f87171);
+  --sev-critica: light-dark(#7f1d1d, #fda4af);
+
+  /* Séries categóricas de gráfico.
+   *
+   * Três matizes, atribuídos em ordem fixa e nunca reciclados: uma quarta série
+   * não ganha cor gerada, ela vira "Outros" ou um gráfico ao lado. As cores de
+   * STATUS são reservadas e não entram aqui — verde de sucesso e vermelho de
+   * erro significam outra coisa, e reusá-los num gráfico faz a categoria
+   * parecer um julgamento. */
+  --serie-1: light-dark(#6f4b99, #9d7fc4);
+  --serie-2: light-dark(#1baf7a, #199e70);
+  --serie-3: light-dark(#eb6834, #d95926);
+
+  /* As duas pontas da rampa de estágio do funil (CRM).
+   *
+   * A rampa termina onde o verde de ganho começa: avançar no funil é convergir
+   * visualmente para o ganho. Por isso ela não vai para o quente — âmbar já
+   * significa "parado" e vermelho, "perdido". Um funil onde avançar parece
+   * perigo é um funil que mente. */
+  --stage-inicio: #6f4b99;
+  --stage-fim: #1b9070;
+}
+
+@theme inline {
+  --color-sev-baixa: var(--sev-baixa);
+  --color-sev-media: var(--sev-media);
+  --color-sev-alta: var(--sev-alta);
+  --color-sev-critica: var(--sev-critica);
+  --color-serie-1: var(--serie-1);
+  --color-serie-2: var(--serie-2);
+  --color-serie-3: var(--serie-3);
+}
