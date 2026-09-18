@@ -1,0 +1,44 @@
+# Publica o pacote no GitHub Packages a cada tag.
+#
+# Usa o GITHUB_TOKEN do próprio workflow, que tem `packages: write` para este
+# repositório — nenhum PAT precisa existir para PUBLICAR. Quem CONSOME é que
+# precisa de um token com `read:packages`, porque o repositório é privado.
+name: publicar
+
+on:
+  push:
+    tags: ["v*"]
+  # Permite publicar uma tag que já existia antes deste workflow.
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Tag a publicar (ex.: v0.1.0)"
+        required: true
+        default: v0.1.0
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.inputs.ref || github.ref }}
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          registry-url: https://npm.pkg.github.com
+          scope: "@lincecorp"
+      - run: bun install --frozen-lockfile
+      # Publicar sem o portão publicaria um pacote que não passa nos próprios
+      # testes — e ele iria para os três produtos.
+      - run: bun run ci
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

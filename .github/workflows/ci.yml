@@ -1,0 +1,32 @@
+# O portão do design system.
+#
+# Roda o mesmo `bun run ci` que se roda na máquina: typecheck, contraste,
+# tokens, testes e build. O portão de contraste é o que impede um token que
+# reprova em AA de chegar aos três produtos de uma vez.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  portao:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install --frozen-lockfile
+      - run: bun run ci
+
+      # O `dist/` é versionado, e um dist defasado é pior que nenhum: os
+      # produtos instalariam a versão anterior da casca sem nenhum aviso.
+      - name: o dist commitado corresponde ao fonte
+        run: |
+          if [ -n "$(git status --porcelain dist)" ]; then
+            echo "O dist/ commitado diverge do que o build produz. Rode 'bun run build' e commite."
+            git --no-pager diff --stat dist
+            exit 1
+          fi
