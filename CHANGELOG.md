@@ -8,6 +8,34 @@ quem atualiza a dependência precisa saber o que vai parecer diferente.
 
 ## [Não publicado]
 
+## [0.2.0]
+
+O design system fica **completo**: os primitivos de interface entram, e o que
+estava marcado como fora de escopo na primeira versão passa a ser o miolo.
+
+### Adicionado
+
+- **Vinte primitivos**, sem nenhuma biblioteca de componente por baixo:
+  `Button`, `Campo`, `Input`, `Textarea`, `Select`, `Checkbox`, `Switch`,
+  `Card`, `Badge`, `Alerta`, `EstadoVazio`, `Separador`, `Avatar`, `Progress`,
+  `Spinner`, `Skeleton`, `Tooltip`, `Tabs`, `Dialogo` e
+  `DialogoDeConfirmacao`. O diálogo usa o `<dialog>` nativo, a escolha usa
+  `<select>` nativo, e a dica é CSS.
+- `docs/componentes.md` e `docs/tokens.md` — a referência completa, peça por
+  peça, com o porquê de cada decisão.
+- `--color-brand`: o roxo da marca **já adaptado ao tema**, para uso em texto e
+  borda.
+- Apelidos de elevação por papel: `shadow-card`, `shadow-dialog`, `shadow-nav`.
+- `--color-bg`, apelido de `sunken`, para bloco rebaixado dentro de um card.
+
+### Corrigido
+
+- `text-brand`, `border-brand` e `bg-brand` não geravam regra nenhuma: existiam
+  os nove degraus da marca, mas não o token sem degrau que essas classes pedem.
+  O Tailwind não avisa — a cor simplesmente não aparece.
+- A escala de elevação tinha sido renomeada para `--shadow-1..4` sem manter os
+  apelidos por papel, o que apagava a sombra de todo card em silêncio.
+
 ## [0.1.2]
 
 Nada muda de aparência.

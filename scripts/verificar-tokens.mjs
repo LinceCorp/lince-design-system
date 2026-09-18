@@ -15,11 +15,22 @@
 // Token declarado e não usado AQUI não é erro: a maior parte deles existe para
 // os produtos, não para a casca. `--sev-critica` e `--serie-3` não aparecem em
 // nenhum componente deste pacote, e é assim que tem de ser.
-import { readFileSync, readdirSync } from "node:fs";
+import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 
 const PASTA_TOKENS = "tokens";
 const PASTA_FONTE = "src";
+
+/** Todo arquivo de fonte, recursivamente — os primitivos vivem em `src/ui/`. */
+function fontesDe(pasta) {
+  const saida = [];
+  for (const nome of readdirSync(pasta)) {
+    const caminho = join(pasta, nome);
+    if (statSync(caminho).isDirectory()) saida.push(...fontesDe(caminho));
+    else if (/\.(tsx|ts)$/.test(nome) && !nome.includes(".test.")) saida.push(caminho);
+  }
+  return saida;
+}
 
 /** Lê todos os `--nome:` declarados na camada de tokens. */
 function declarados() {
@@ -40,11 +51,9 @@ function declarados() {
  */
 function referenciados() {
   const usos = new Map();
-  const arquivos = readdirSync(PASTA_FONTE).filter(
-    (a) => (a.endsWith(".tsx") || a.endsWith(".ts")) && !a.includes(".test."),
-  );
+  const arquivos = fontesDe(PASTA_FONTE);
   for (const arquivo of arquivos) {
-    const fonte = readFileSync(join(PASTA_FONTE, arquivo), "utf8");
+    const fonte = readFileSync(arquivo, "utf8");
     for (const m of fonte.matchAll(/var\(\s*(--[a-z0-9-]+)|[a-z-]+\((--[a-z0-9-]+)\)/gi)) {
       const nome = m[1] ?? m[2];
       if (!nome) continue;

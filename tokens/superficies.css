@@ -60,6 +60,10 @@
  * `inline` é OBRIGATÓRIO: sem ele o Tailwind congela o valor da variável no
  * momento da compilação, e a troca de tema deixa de surtir efeito. */
 @theme inline {
+  --color-brand: var(--marca);
+  /* `bg` é o fundo rebaixado de um bloco DENTRO de um card — citação, nota,
+     resposta. Apelido de `sunken`, mantido porque é o nome que o JSX já usa. */
+  --color-bg: var(--bg-sunken);
   --color-canvas: var(--bg-canvas);
   --color-surface: var(--bg-surface);
   --color-elevated: var(--bg-elevated);

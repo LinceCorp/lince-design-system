@@ -18,8 +18,30 @@
 ## Instalação
 
 ```bash
-bun add github:LinceCorp/lince-design-system#v0.1.1
+bun add github:LinceCorp/lince-design-system#v0.2.0
 ```
+
+## O que vem dentro
+
+**26 componentes** e **10 arquivos de token**, documentados peça por peça:
+
+| | |
+|---|---|
+| 📐 [**Tokens**](docs/tokens.md) | marca, tipografia, raios, superfícies, estado, elevação, movimento, camadas, domínio |
+| 🧩 [**Componentes**](docs/componentes.md) | casca, ação, formulário, superfície, sinal, sobreposição |
+
+```
+Casca         AppShell · Sidebar · Topbar · BottomNav · PageHeader · RodapeLince · Logotipo
+Ação          Button
+Formulário    Campo · Input · Textarea · Select · Checkbox · Switch
+Superfície    Card · EstadoVazio · Separador
+Sinal         Badge · Alerta · Progress · Spinner · Skeleton · Avatar
+Sobreposição  Dialogo · DialogoDeConfirmacao · Tooltip · Tabs
+```
+
+Sem Radix, sem Headless UI, sem biblioteca de componente nenhuma: as únicas
+dependências de par são React, o roteador e os ícones. O diálogo usa o
+`<dialog>` nativo, a escolha usa `<select>` nativo, e a dica é CSS.
 
 ## Os tokens
 
@@ -91,6 +113,23 @@ persistência entram por prop:
 
 `filtrarItem` é apresentação, nunca controle de acesso — esconder um item não
 protege a rota.
+
+## Os primitivos
+
+```tsx
+<Button icone={<Plus size={16} />}>Nova solicitação</Button>
+<Input rotulo="E-mail" type="email" erro={erros.email} />
+<Badge tom="sucesso" comPonto>Entregue</Badge>
+<Card titulo="Resumo" acoes={<Button variante="texto" tamanho="sm">Ver tudo</Button>}>…</Card>
+<DialogoDeConfirmacao titulo="Enviar respostas?" descricao="Depois de enviar, não poderão ser alteradas." … />
+```
+
+Acessibilidade não é opcional em nenhum deles: campo sem rótulo não compila no
+contrato, erro entra em `aria-describedby` e `role="alert"`, botão só de ícone
+exige `aria-label`, e **a cor nunca é a única portadora da informação**.
+
+A referência completa, com todas as props e o porquê de cada decisão, está em
+[`docs/componentes.md`](docs/componentes.md).
 
 ## Desenvolvimento
 

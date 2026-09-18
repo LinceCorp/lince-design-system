@@ -22,6 +22,15 @@
   --marca-2: light-dark(var(--color-brand-600), var(--color-brand-700));
   --marca-3: light-dark(var(--color-brand-800), var(--color-brand-800));
 
+  /* O roxo da marca JÁ ADAPTADO ao tema.
+   *
+   * `brand-500` é o pigmento; `brand` é o pigmento que se pode pôr em texto.
+   * Sem este token, `text-brand` e `border-brand` não geram regra nenhuma — o
+   * Tailwind fica em silêncio e a cor simplesmente não aparece. Foi assim que
+   * vinte lugares de um produto pintaram a marca com a cor herdada por meses.
+   */
+  --marca: var(--accent);
+
   /* O fundo da coluna do formulário na tela de entrada.
    *
    * NÃO acompanha o canvas de cada produto, de propósito: a porta de entrada é
