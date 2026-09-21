@@ -173,6 +173,15 @@ Um variant só, que cobre os dois gatilhos:
 A trava manual só troca o `color-scheme` — todo token responde por
 `light-dark()`, então não há segunda paleta para manter em sincronia.
 
+> **Se o produto usa `next-themes`**, ele já escreve `style="color-scheme: …"`
+> inline no `<html>`, e estilo inline vence qualquer regra de folha. Isso
+> funciona a favor: é exatamente o que o `light-dark()` precisa. As regras
+> `[data-theme]` daqui são o caminho para quem não usa biblioteca de tema.
+>
+> Consequência prática ao depurar: trocar `data-theme` na mão pelo console
+> **não** muda o tema num produto com `next-themes` — o inline continua
+> mandando. Use o controle de tema do produto.
+
 ## Os dois portões
 
 ```bash
