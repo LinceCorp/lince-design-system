@@ -8,6 +8,19 @@ quem atualiza a dependência precisa saber o que vai parecer diferente.
 
 ## [Não publicado]
 
+## [0.3.2]
+
+### Corrigido
+
+- **A medição de contraste ignorava a tinta do estágio.** O cabeçalho de uma
+  coluna de funil pinta texto sobre a cor do estágio aplicada em `--stage-tint`
+  por cima do canvas, e a medição só olhava as superfícies nomeadas — o portão
+  passava e a tela reprovava. As duas pontas da rampa entraram na conta.
+- `--sev-baixa` no tema claro passa de `#2e7d32` para `#2b7530`: o valor antigo
+  tinha folga sobre branco (5,13:1) e reprovava sobre a tinta do estágio
+  (4,43:1). **Muda de aparência**: o verde de severidade baixa fica um degrau
+  mais escuro no tema claro.
+
 ## [0.3.1]
 
 ### Adicionado

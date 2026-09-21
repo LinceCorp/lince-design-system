@@ -11,7 +11,10 @@
      que o backend os grava: baixa, média, alta, crítica.
      Cada tema recebe valor próprio pelo motivo de sempre: o verde escuro que
      passa sobre branco some sobre preto. */
-  --sev-baixa: light-dark(#2e7d32, #4ade80);
+  /* O verde do claro é um degrau mais escuro do que o óbvio: #2e7d32 passa com
+     folga sobre branco (5,13:1) e REPROVA sobre a tinta do estágio (4,43:1), que
+     é onde a severidade também aparece. Medido, não escolhido. */
+  --sev-baixa: light-dark(#2b7530, #4ade80);
   --sev-media: light-dark(#a2490a, #fbbf24);
   --sev-alta: light-dark(#b91c1c, #f87171);
   --sev-critica: light-dark(#7f1d1d, #fda4af);

@@ -69,6 +69,20 @@ const PRIMEIRO_PLANO = [
 ];
 
 /**
+ * As duas pontas da rampa de estágio, que também são superfície.
+ *
+ * O cabeçalho de uma coluna de funil pinta texto sobre a cor do estágio
+ * aplicada em `--stage-tint` por cima do canvas. Como a medição só olhava as
+ * superfícies nomeadas, **o CI passava e a tela reprovava**: seis combinações
+ * do tema claro ficavam abaixo do piso, porque já tinham folga de décimos sobre
+ * o canvas e a tinta comia o que sobrava.
+ *
+ * As duas pontas bastam: todo estágio intermediário é interpolação entre elas,
+ * e o contraste no meio fica entre os dois extremos.
+ */
+const PONTAS_DA_RAMPA = ["--stage-inicio", "--stage-fim"];
+
+/**
  * Pares medidos por conta própria, porque o fundo não é uma das superfícies.
  *
  * O texto do aviso de erro vive sobre a superfície TINGIDA, não sobre o canvas:
@@ -204,6 +218,9 @@ for (const tema of TEMAS) {
   for (const fundo of SUPERFICIES) {
     for (const frente of PRIMEIRO_PLANO) pares.push([frente, fundo]);
   }
+  for (const ponta of PONTAS_DA_RAMPA) {
+    for (const frente of PRIMEIRO_PLANO) pares.push([frente, ponta]);
+  }
   pares.push(...PARES_PROPRIOS);
 
   for (const [frente, fundo] of pares) {
@@ -211,7 +228,16 @@ for (const tema of TEMAS) {
       reprovados.push(`${tema}: token ausente — ${frente} sobre ${fundo}`);
       continue;
     }
-    const bruto = paraRgba(resolver(tabela[fundo], tabela));
+    // A ponta da rampa não é cor cheia: ela entra como TINTA, na porcentagem
+    // de `--stage-tint`, por cima do canvas.
+    const ehRampa = PONTAS_DA_RAMPA.includes(fundo);
+    const bruto = ehRampa
+      ? (() => {
+          const cor = paraRgba(resolver(tabela[fundo], tabela));
+          const tinta = parseFloat(String(tabela["--stage-tint"] ?? "0").replace("%", "")) / 100;
+          return [cor[0], cor[1], cor[2], tinta];
+        })()
+      : paraRgba(resolver(tabela[fundo], tabela));
 
     // Superfície TRANSLÚCIDA não é fundo: ela deixa passar o que está embaixo.
     // `--status-danger-surface` no escuro é vermelho a 12 % — medi-lo como se
