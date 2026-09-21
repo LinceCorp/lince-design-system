@@ -18,7 +18,7 @@
 ## Instalação
 
 ```bash
-bun add github:LinceCorp/lince-design-system#v0.2.0
+bun add github:LinceCorp/lince-design-system#v0.4.0
 ```
 
 ## O que vem dentro
@@ -155,3 +155,19 @@ Tag semver, aplicada depois de `bun run ci` passar. **Minor** para token novo ou
 valor alterado; **major** para token removido ou assinatura de componente
 mudada. O `CHANGELOG.md` diz o que muda de **aparência**, não só o que muda de
 código.
+
+### Como um produto sobe de versão
+
+```bash
+bun update @lincecorp/design-system   # depois de apontar a tag nova
+bun run ci                            # no produto
+```
+
+> **`bun add` com uma tag nova pode não re-resolver.** Ele escreve o
+> especificador no `package.json` e continua servindo o commit que já estava no
+> lockfile — o produto fica com a versão velha, e o erro aparece como "esta prop
+> não existe", num tipo que você acabou de publicar. `bun update <pacote>` refaz
+> a resolução.
+
+A trava contra deriva é o `bun.lock`: um produto não fica com tokens diferentes
+dos outros sem que isso apareça como diff.
