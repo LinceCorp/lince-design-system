@@ -21,6 +21,14 @@ exatamente assim que três definições do mesmo design system se separaram.
 | `--color-brand` | `var(--accent)` | **o roxo já adaptado ao tema** |
 | `--marca-1/2/3` | paradas da lavagem | tela de entrada |
 | `--auth-canvas` | `#f8f9fa` / `#1e1e2e` | coluna do formulário de entrada |
+| `--color-on-marca` | branco | título sobre a coluna colorida |
+| `--color-on-marca-muted` | `brand-50` | texto secundário sobre ela |
+
+> A coluna colorida é uma **superfície**, e tem texto por cima. Ela escapava da
+> medição por ser pintada com degradê em vez de cor de fundo — e foi assim que
+> um subtítulo a 4,56:1 chegou a três produtos. Use `text-on-marca` e
+> `text-on-marca-muted`; escolher um degrau da marca no olho é como aquilo
+> aconteceu.
 
 > `brand-500` é o pigmento; **`brand` é o pigmento que se pode pôr em texto**.
 > Sem o token sem degrau, `text-brand` não gera regra nenhuma e a cor

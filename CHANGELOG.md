@@ -8,6 +8,24 @@ quem atualiza a dependência precisa saber o que vai parecer diferente.
 
 ## [Não publicado]
 
+## [0.5.0]
+
+### Adicionado
+
+- `--color-on-marca` e `--color-on-marca-muted`, para texto **sobre a coluna
+  colorida** da tela de entrada. Quem escreve a tela não precisa mais escolher
+  um degrau da marca no olho.
+
+### Corrigido
+
+- **A coluna da marca não era medida.** Ela é pintada com degradê, e não com
+  cor de fundo, e por isso escapava da medição de contraste — foi assim que um
+  subtítulo em `brand-100`, a **4,56:1** sobre a parada mais clara, chegou a
+  três produtos. As três paradas entram na conta agora, e a mais clara é a que
+  aperta.
+- **Muda de aparência:** o texto secundário da tela de entrada passa de
+  `brand-100` para `brand-50` — de 4,56:1 para 5,76:1.
+
 ## [0.4.0]
 
 ### Adicionado

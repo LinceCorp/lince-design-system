@@ -31,6 +31,19 @@
    */
   --marca: var(--accent);
 
+  /* ----- Texto SOBRE a marca -----
+   *
+   * A coluna colorida da tela de entrada é uma superfície como qualquer outra,
+   * e tem texto por cima. Ela não estava na medição de contraste, e por isso o
+   * subtítulo vinha em `brand-100`, que dá 4,56:1 sobre a parada mais clara do
+   * degradê — passa por seis centésimos, e na tela lê como apagado.
+   *
+   * Estes dois tokens existem para que quem escreve a tela não precise
+   * escolher um degrau da marca no olho.
+   */
+  --on-marca: #ffffff;
+  --on-marca-muted: var(--color-brand-50);
+
   /* O fundo da coluna do formulário na tela de entrada.
    *
    * NÃO acompanha o canvas de cada produto, de propósito: a porta de entrada é
@@ -38,6 +51,11 @@
    * fazia cada uma abrir com um fundo diferente. Ver o ADR que o registra.
    */
   --auth-canvas: light-dark(#f8f9fa, #1e1e2e);
+}
+
+@theme inline {
+  --color-on-marca: var(--on-marca);
+  --color-on-marca-muted: var(--on-marca-muted);
 }
 
 /* O fundo da metade colorida da tela de entrada.

@@ -88,7 +88,20 @@ const PONTAS_DA_RAMPA = ["--stage-inicio", "--stage-fim"];
  * O texto do aviso de erro vive sobre a superfície TINGIDA, não sobre o canvas:
  * medi-lo contra o canvas foi o erro que deixou 3,9:1 passar por 7,7:1.
  */
-const PARES_PROPRIOS = [["--status-danger-strong", "--status-danger-surface"]];
+const PARES_PROPRIOS = [
+  ["--status-danger-strong", "--status-danger-surface"],
+  // A coluna colorida da tela de entrada. Ela é uma SUPERFÍCIE, e ficou de
+  // fora da medição por ser pintada com degradê em vez de cor de fundo — foi
+  // assim que um subtítulo a 4,56:1 chegou a três produtos.
+  //
+  // As três paradas entram: a mais clara é a que aperta.
+  ["--on-marca", "--marca-1"],
+  ["--on-marca", "--marca-2"],
+  ["--on-marca", "--marca-3"],
+  ["--on-marca-muted", "--marca-1"],
+  ["--on-marca-muted", "--marca-2"],
+  ["--on-marca-muted", "--marca-3"],
+];
 
 // ----- leitura -----
 
