@@ -15,7 +15,15 @@ export interface PerfilDaCasca {
     para?: string;
     /** Imagem do avatar. Ausente, a casca desenha as iniciais do nome. */
     avatarUrl?: string;
-    aoSair: () => void;
+    /**
+     * Encerra a sessão. **Opcional**: ausente, a barra lateral não desenha o
+     * botão de sair.
+     *
+     * Existe assim porque nem todo produto põe o sair no mesmo lugar — num deles
+     * ele vive no rodapé da barra, noutro dentro do menu do avatar na barra
+     * superior. Desenhá-lo sempre produzia dois botões de sair na mesma tela.
+     */
+    aoSair?: () => void;
 }
 /**
  * O tema, **controlado pelo produto**.

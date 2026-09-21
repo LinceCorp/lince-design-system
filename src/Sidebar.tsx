@@ -255,7 +255,9 @@ export function Sidebar({
         )}
       </div>
 
-      {/* Rodapé: tema e sair. */}
+      {/* Rodapé: tema e sair. Some por inteiro quando o produto não põe
+          nenhum dos dois aqui — uma faixa vazia com borda é pior que nada. */}
+      {(tema || perfil.aoSair) && (
       <div
         className={cn(
           "flex items-center gap-1 border-t border-line-subtle p-2",
@@ -277,19 +279,22 @@ export function Sidebar({
             )}
           </button>
         )}
-        <button
-          type="button"
-          onClick={() => {
-            aoNavegar?.();
-            perfil.aoSair();
-          }}
-          aria-label="Sair"
-          title="Sair"
-          className="grid h-10 flex-1 place-items-center rounded-control text-danger transition hover:bg-input"
-        >
-          <LogOut size={18} aria-hidden="true" />
-        </button>
+        {perfil.aoSair && (
+          <button
+            type="button"
+            onClick={() => {
+              aoNavegar?.();
+              perfil.aoSair?.();
+            }}
+            aria-label="Sair"
+            title="Sair"
+            className="grid h-10 flex-1 place-items-center rounded-control text-danger transition hover:bg-input"
+          >
+            <LogOut size={18} aria-hidden="true" />
+          </button>
+        )}
       </div>
+      )}
     </aside>
   );
 }

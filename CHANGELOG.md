@@ -8,6 +8,22 @@ quem atualiza a dependência precisa saber o que vai parecer diferente.
 
 ## [Não publicado]
 
+## [0.4.0]
+
+### Adicionado
+
+- `AppShell` aceita `topbar`, que **substitui a barra superior inteira** e
+  recebe a função que abre a gaveta. A barra superior é onde os produtos mais
+  divergem — um tem busca global, assistente e menu de avatar; outro tem um sino
+  e mais nada. Isso é conteúdo, e conteúdo é do produto.
+
+### Alterado
+
+- `PerfilDaCasca.aoSair` passa a ser **opcional**. Ausente, a barra lateral não
+  desenha o botão de sair, e o rodapé inteiro some se também não houver tema.
+  Nem todo produto põe o sair no mesmo lugar, e desenhá-lo sempre dava dois
+  botões de sair na mesma tela.
+
 ## [0.3.2]
 
 ### Corrigido

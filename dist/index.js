@@ -142,7 +142,7 @@ function A({ nav: e, logo: t, marcaCompacta: n, perfil: r, tema: i, acoesRapidas
 					}, e.id);
 				})] })]
 			}),
-			/* @__PURE__ */ S("div", {
+			(i || r.aoSair) && /* @__PURE__ */ S("div", {
 				className: C("flex items-center gap-1 border-t border-line-subtle p-2", s && "flex-col"),
 				children: [i && /* @__PURE__ */ x("button", {
 					type: "button",
@@ -157,10 +157,10 @@ function A({ nav: e, logo: t, marcaCompacta: n, perfil: r, tema: i, acoesRapidas
 						size: 18,
 						"aria-hidden": "true"
 					})
-				}), /* @__PURE__ */ x("button", {
+				}), r.aoSair && /* @__PURE__ */ x("button", {
 					type: "button",
 					onClick: () => {
-						f?.(), r.aoSair();
+						f?.(), r.aoSair?.();
 					},
 					"aria-label": "Sair",
 					title: "Sair",
@@ -235,24 +235,24 @@ function M({ nav: e, filtrarItem: t, aoMais: n }) {
 }
 //#endregion
 //#region src/AppShell.tsx
-function N({ nav: n, logo: a, marcaCompacta: o, perfil: s, tema: c, acoesRapidas: l, filtrarItem: u, fixada: d, aoAlternarFixada: f, titulo: p, topbarExtra: m, children: h }) {
-	let [g, _] = i(!1), [v, y] = i(!1), b = r(null), w = r(null), T = e(() => {
-		w.current = document.activeElement, _(!0);
-	}, []), E = e(() => {
-		_(!1), w.current?.focus();
+function N({ nav: n, logo: a, marcaCompacta: o, perfil: s, tema: c, acoesRapidas: l, filtrarItem: u, fixada: d, aoAlternarFixada: f, titulo: p, topbarExtra: m, topbar: h, children: g }) {
+	let [_, v] = i(!1), [y, b] = i(!1), w = r(null), T = r(null), E = e(() => {
+		T.current = document.activeElement, v(!0);
+	}, []), D = e(() => {
+		v(!1), T.current?.focus();
 	}, []);
 	t(() => {
-		if (!g) return;
+		if (!_) return;
 		let e = (e) => {
-			e.key === "Escape" && E();
+			e.key === "Escape" && D();
 		};
 		return document.addEventListener("keydown", e), () => document.removeEventListener("keydown", e);
-	}, [g, E]);
-	let D = d || v, O = () => {
-		b.current && window.clearTimeout(b.current), y(!0);
-	}, k = () => {
-		b.current = window.setTimeout(() => y(!1), 80);
-	}, N = {
+	}, [_, D]);
+	let O = d || y, k = () => {
+		w.current && window.clearTimeout(w.current), b(!0);
+	}, N = () => {
+		w.current = window.setTimeout(() => b(!1), 80);
+	}, P = {
 		nav: n,
 		logo: a,
 		marcaCompacta: o,
@@ -272,55 +272,55 @@ function N({ nav: n, logo: a, marcaCompacta: o, perfil: s, tema: c, acoesRapidas
 			/* @__PURE__ */ x("div", {
 				className: "fixed top-0 left-0 z-[var(--z-sidebar)] hidden h-dvh md:block",
 				children: /* @__PURE__ */ x(A, {
-					...N,
-					colapsada: !D,
+					...P,
+					colapsada: !O,
 					fixada: d,
 					aoAlternarFixada: f,
-					aoEntrarComMouse: O,
-					aoSairComMouse: k
+					aoEntrarComMouse: k,
+					aoSairComMouse: N
 				})
 			}),
-			g && /* @__PURE__ */ S("div", {
+			_ && /* @__PURE__ */ S("div", {
 				role: "dialog",
 				"aria-modal": "true",
 				"aria-label": "Navegação",
 				className: "fixed inset-0 z-[var(--z-drawer)] md:hidden",
 				children: [/* @__PURE__ */ x("div", {
 					className: "absolute inset-0 bg-black/60",
-					onClick: E
+					onClick: D
 				}), /* @__PURE__ */ x("div", {
 					className: "absolute top-0 left-0 h-full",
 					children: /* @__PURE__ */ x(A, {
-						...N,
+						...P,
 						colapsada: !1,
-						aoNavegar: E
+						aoNavegar: D
 					})
 				})]
 			}),
 			/* @__PURE__ */ S("div", {
 				className: C("flex h-dvh flex-col transition-[padding] duration-[var(--dur)]", d ? "md:pl-(--sidebar-w)" : "md:pl-(--sidebar-w-collapsed)"),
-				children: [/* @__PURE__ */ x(j, {
-					aoAbrirMenu: T,
+				children: [h ? h(E) : /* @__PURE__ */ x(j, {
+					aoAbrirMenu: E,
 					titulo: p,
 					extra: m
 				}), /* @__PURE__ */ x("main", {
 					id: "conteudo",
 					tabIndex: -1,
 					className: "flex-1 overflow-y-auto p-4 pb-20 sm:p-6 md:pb-6",
-					children: h
+					children: g
 				})]
 			}),
 			/* @__PURE__ */ x(M, {
 				nav: n,
 				filtrarItem: u,
-				aoMais: T
+				aoMais: E
 			})
 		]
 	});
 }
 //#endregion
 //#region src/PageHeader.tsx
-function ee({ titulo: e, descricao: t, acoes: n, className: r }) {
+function P({ titulo: e, descricao: t, acoes: n, className: r }) {
 	return /* @__PURE__ */ S("div", {
 		className: C("mb-6 flex items-start justify-between gap-4", r),
 		children: [/* @__PURE__ */ S("div", {
@@ -340,7 +340,7 @@ function ee({ titulo: e, descricao: t, acoes: n, className: r }) {
 }
 //#endregion
 //#region src/Logotipo.tsx
-var P = [
+var ee = [
 	"M0 0H14.98V38.45H37.4V51.18H0V0Z",
 	"M55.75 10.23V51.18H41.58V10.23H55.75Z",
 	"M175.24 40.8C170.13 40.58 167.37 38.79 165.95 36.18L191.31 27.1C190.36 20.64 187.46 8.50999 171.2 8.50999C162.7 8.50999 152.72 12.29 149.81 23.99C149.19 26.47 148.8 30.08 147.29 32.14C144.17 36.43 138.23 40.33 131.4 40.33C122.79 40.33 120.72 35.13 120.72 29.43C120.72 24.17 123.36 20.5 128.24 20.5C134.84 20.5 136.01 28.09 136.01 28.12L146.61 22.52C146.61 22.52 144.67 8.48999 127.36 8.48999C119.1 8.48999 105.17 13.1 105.17 30.16C105.17 45.2 115.67 51.97 129.54 51.97C143.4 51.97 150.05 44.08 151.62 41.89C155.57 49.08 163.64 52.42 173.37 52.42C181.87 52.42 190.63 48.71 194.53 45.14L189.45 35.34C187.32 38.61 180.65 41.01 175.24 40.78V40.8ZM179.46 23.29L163.6 28.88C162.9 24.54 163.58 20.54 167.57 18.69C174.28 15.57 178.15 20.68 179.46 23.29Z",
@@ -355,7 +355,7 @@ function F({ className: e, decorativo: t = !1 }) {
 			role: "img",
 			"aria-label": "Lince"
 		},
-		children: P.map((e) => /* @__PURE__ */ x("path", {
+		children: ee.map((e) => /* @__PURE__ */ x("path", {
 			d: e,
 			fill: "currentColor"
 		}, e))
@@ -387,17 +387,17 @@ var R = {
 	aviso: a,
 	perigo: v,
 	info: c
-}, te = {
+}, z = {
 	sucesso: "border-success/40 bg-success/10 text-success",
 	aviso: "border-warning/40 bg-warning/10 text-warning",
 	perigo: "border-danger-line bg-danger-surface text-danger-strong",
 	info: "border-info/40 bg-info/10 text-info"
 };
-function ne({ children: e, tom: t = "info", titulo: n, className: r }) {
+function te({ children: e, tom: t = "info", titulo: n, className: r }) {
 	let i = R[t];
 	return /* @__PURE__ */ S("div", {
 		role: t === "perigo" ? "alert" : void 0,
-		className: C("flex items-start gap-2.5 rounded-card border px-3.5 py-3 text-body", te[t], r),
+		className: C("flex items-start gap-2.5 rounded-card border px-3.5 py-3 text-body", z[t], r),
 		children: [/* @__PURE__ */ x(i, {
 			size: 18,
 			"aria-hidden": "true",
@@ -416,11 +416,11 @@ function ne({ children: e, tom: t = "info", titulo: n, className: r }) {
 }
 //#endregion
 //#region src/ui/Avatar.tsx
-function z(e) {
+function B(e) {
 	let t = e.trim().split(/\s+/).filter(Boolean);
 	return t.length === 0 ? "?" : ((t[0]?.[0] ?? "") + (t.length > 1 ? t[t.length - 1]?.[0] ?? "" : "")).toUpperCase();
 }
-function B({ nome: e, url: t, tamanho: n = 40, className: r }) {
+function ne({ nome: e, url: t, tamanho: n = 40, className: r }) {
 	let i = {
 		width: n,
 		height: n
@@ -438,7 +438,7 @@ function B({ nome: e, url: t, tamanho: n = 40, className: r }) {
 			fontSize: Math.max(11, Math.round(n * .36))
 		},
 		className: C("grid shrink-0 place-items-center rounded-full bg-brand font-semibold text-white", r),
-		children: z(e)
+		children: B(e)
 	});
 }
 //#endregion
@@ -964,4 +964,4 @@ function _e({ texto: e, children: t, lado: r = "cima", className: i }) {
 	});
 }
 //#endregion
-export { ne as Alerta, N as AppShell, B as Avatar, W as Badge, M as BottomNav, J as Button, X as CLASSES_DE_CONTROLE, Y as Campo, re as Card, ie as Checkbox, Q as Dialogo, oe as DialogoDeConfirmacao, se as EstadoVazio, ce as Input, F as Logotipo, w as MAX_BARRA_INFERIOR, ee as PageHeader, le as Progress, L as RodapeLince, I as SITE_INSTITUCIONAL_URL, ue as Select, de as Separador, A as Sidebar, fe as Skeleton, pe as Spinner, $ as Switch, me as Tabs, he as Textarea, _e as Tooltip, j as Topbar, Z as bordaDoControle, C as cn, D as gruposComItens, z as iniciaisDe, E as itensDaBarraInferior, T as itensVisiveis };
+export { te as Alerta, N as AppShell, ne as Avatar, W as Badge, M as BottomNav, J as Button, X as CLASSES_DE_CONTROLE, Y as Campo, re as Card, ie as Checkbox, Q as Dialogo, oe as DialogoDeConfirmacao, se as EstadoVazio, ce as Input, F as Logotipo, w as MAX_BARRA_INFERIOR, P as PageHeader, le as Progress, L as RodapeLince, I as SITE_INSTITUCIONAL_URL, ue as Select, de as Separador, A as Sidebar, fe as Skeleton, pe as Spinner, $ as Switch, me as Tabs, he as Textarea, _e as Tooltip, j as Topbar, Z as bordaDoControle, C as cn, D as gruposComItens, B as iniciaisDe, E as itensDaBarraInferior, T as itensVisiveis };

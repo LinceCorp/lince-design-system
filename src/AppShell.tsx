@@ -39,6 +39,21 @@ export interface AppShellProps {
   titulo?: string;
   /** Sino de notificações, busca — o que o produto pendurar à direita. */
   topbarExtra?: SlotDaCasca;
+  /**
+   * Substitui a barra superior INTEIRA.
+   *
+   * Recebe a função que abre a gaveta, porque o botão de menu do celular vive
+   * na barra superior e precisa dela.
+   *
+   * Existe porque a barra superior é onde os produtos mais divergem: um tem
+   * busca global, assistente e menu de avatar; outro tem um sino e mais nada.
+   * Isso é CONTEÚDO, e conteúdo é do produto. O que o pacote continua sendo
+   * dono é do resto — gaveta, salto para o conteúdo, barra inferior,
+   * deslocamento do conteúdo pela largura da barra lateral.
+   *
+   * Passando este slot, `titulo` e `topbarExtra` deixam de ter efeito.
+   */
+  topbar?: (aoAbrirMenu: () => void) => ReactNode;
   /** O conteúdo da rota. Um `<Outlet/>` de rota de layout, ou a própria página. */
   children?: ReactNode;
 }
@@ -58,6 +73,7 @@ export function AppShell({
   aoAlternarFixada,
   titulo,
   topbarExtra,
+  topbar,
   children,
 }: AppShellProps) {
   const [gavetaAberta, setGavetaAberta] = useState(false);
@@ -165,7 +181,11 @@ export function AppShell({
           fixada ? "md:pl-(--sidebar-w)" : "md:pl-(--sidebar-w-collapsed)",
         )}
       >
-        <Topbar aoAbrirMenu={abrirGaveta} titulo={titulo} extra={topbarExtra} />
+        {topbar ? (
+          topbar(abrirGaveta)
+        ) : (
+          <Topbar aoAbrirMenu={abrirGaveta} titulo={titulo} extra={topbarExtra} />
+        )}
         <main
           id="conteudo"
           tabIndex={-1}

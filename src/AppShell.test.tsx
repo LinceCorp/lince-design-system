@@ -105,3 +105,36 @@ describe("AppShell", () => {
     expect(screen.queryByRole("link", { name: "Inspeções" })).not.toBeInTheDocument();
   });
 });
+
+describe("AppShell, a barra superior substituída", () => {
+  // Atenção: a barra superior é onde os produtos mais divergem — um tem busca
+  // global, assistente e menu de avatar; outro tem um sino e mais nada. Isso é
+  // conteúdo, e conteúdo é do produto.
+  it("topbar substitui a barra padrão e recebe o abridor da gaveta", async () => {
+    render(
+      <MemoryRouter>
+        <AppShell
+          nav={nav}
+          logo={<span>Lince</span>}
+          marcaCompacta={<span>L</span>}
+          perfil={perfil}
+          fixada
+          aoAlternarFixada={vi.fn()}
+          titulo="Ignorado"
+          topbar={(abrir) => (
+            <header>
+              <button onClick={abrir}>meu menu</button>
+              <span>minha barra</span>
+            </header>
+          )}
+        >
+          <p>conteúdo</p>
+        </AppShell>
+      </MemoryRouter>,
+    );
+    expect(screen.getByText("minha barra")).toBeVisible();
+    expect(screen.queryByText("Ignorado")).not.toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: "meu menu" }));
+    expect(screen.getByRole("dialog", { name: /navegação/i })).toBeInTheDocument();
+  });
+});

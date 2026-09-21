@@ -115,3 +115,36 @@ describe("Sidebar", () => {
     expect(screen.queryByText("Lince")).not.toBeInTheDocument();
   });
 });
+
+describe("Sidebar, o rodapé opcional", () => {
+  // Atenção: um produto põe o sair no rodapé da barra; outro, dentro do menu do
+  // avatar na barra superior. Desenhá-lo sempre dava dois botões de sair na
+  // mesma tela.
+  it("sem aoSair, não desenha o botão de sair", () => {
+    render(
+      <MemoryRouter>
+        <Sidebar
+          nav={nav}
+          logo={<span>Lince</span>}
+          marcaCompacta={<span>L</span>}
+          perfil={{ nome: "Teste Demo" }}
+        />
+      </MemoryRouter>,
+    );
+    expect(screen.queryByRole("button", { name: "Sair" })).not.toBeInTheDocument();
+  });
+
+  it("sem tema e sem aoSair, o rodapé inteiro some", () => {
+    const { container } = render(
+      <MemoryRouter>
+        <Sidebar
+          nav={nav}
+          logo={<span>Lince</span>}
+          marcaCompacta={<span>L</span>}
+          perfil={{ nome: "Teste Demo" }}
+        />
+      </MemoryRouter>,
+    );
+    expect(container.querySelectorAll("aside > div.border-t")).toHaveLength(0);
+  });
+});
